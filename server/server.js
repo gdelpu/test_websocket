@@ -13,6 +13,16 @@ const start = async () => {
 
     await server.register([Nes, HapiPino]);
     server.route({
+        method: 'GET',
+        path: '/healthcheck',
+        config: {
+            handler: (request, h) => {
+                return true;
+            }
+        }
+    });
+
+    server.route({
         method: 'POST',
         path: '/message',
         config: {
