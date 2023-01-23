@@ -1,6 +1,7 @@
 const Hapi = require('@hapi/hapi');
 const Nes = require('@hapi/nes');
 const crypto = require('crypto');
+const HapiPino = require('hapi-pino');
 
 
 const server = new Hapi.Server({ port: 5000 });
@@ -10,7 +11,7 @@ const start = async () => {
 
 
 
-    await server.register(Nes);
+    await server.register([Nes, HapiPino]);
     server.route({
         method: 'POST',
         path: '/message',
@@ -41,7 +42,6 @@ const start = async () => {
     server.subscription('/message'); // declaring the subscription path
 
     await server.start();
-    console.log('server started');
 };
 
 start();
