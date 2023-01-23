@@ -1,6 +1,6 @@
 const Nes = require('@hapi/nes');
 
-var client = new Nes.Client('ws://localhost:5000');
+var client = new Nes.Client('ws://test-websocket-1209481832.eu-west-1.elb.amazonaws.com:80');
 
 const start = async () => {
     await client.connect();
