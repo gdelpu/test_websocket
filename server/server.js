@@ -4,7 +4,7 @@ const crypto = require('crypto');
 const HapiPino = require('hapi-pino');
 
 
-const server = new Hapi.Server({ port: 5000 });
+const server = new Hapi.Server({ address: '0.0.0.0',port: 5000 });
 
 const uuid = crypto.randomUUID()
 const start = async () => {
