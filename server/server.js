@@ -17,7 +17,7 @@ const start = async () => {
         path: '/healthcheck',
         config: {
             handler: (request, h) => {
-                return true;
+                return 'ok';
             }
         }
     });
@@ -29,8 +29,7 @@ const start = async () => {
             id: 'message',
             handler: (request, h) => {
                 const message = request.payload.message;
-                console.log(`Message received: ${message}`);
-                history.push(message);
+                server.log(['ws'], message);
 
                 server.publish("/message", { uuid, message }); // publish the message to the clients
                 return true;

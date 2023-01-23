@@ -1,6 +1,6 @@
 const Nes = require('@hapi/nes');
 
-var client = new Nes.Client('ws://test-websocket-1209481832.eu-west-1.elb.amazonaws.com:80');
+let client = new Nes.Client('ws://test-websocket-1209481832.eu-west-1.elb.amazonaws.com:5000');
 
 const start = async () => {
     await client.connect();
@@ -9,7 +9,6 @@ const start = async () => {
         path: "uuid",
         method: "POST"
     });
-
 
     client.subscribe('/message', (payload, flags) => {
         if (payload.uuid === uuid) {
@@ -21,3 +20,9 @@ const start = async () => {
 };
 
 start();
+
+setInterval(()=>client.request({
+    path: "message", // Can also request '/message'
+    method: "POST",
+    payload: { message: "Hello!"} }
+), 1000)
